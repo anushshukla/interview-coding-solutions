@@ -43,8 +43,9 @@ For a given input return the count of unique numbers.
 
 Ex:
 
-I/P = ```json
-const friends = [
+I/P =
+```json
+[
     {
         "name": "Rahul",
         "friends": [
@@ -125,7 +126,7 @@ const friends = [
         ]
     }
 ]
-``
+```
 
 Print all the Friends of friends names
 
