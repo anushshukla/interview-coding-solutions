@@ -24,7 +24,7 @@ For a given input return the count of unique numbers.
 
 Ex:
 
-I/P = [1, 1, 1, 1, 2]
+I/P = `[1, 1, 1, 1, 2]`
 Expected O/P: 2
 
 
@@ -34,3 +34,110 @@ Expected O/P: 2
 - Input is going to array of numbers
 
 Code: https://github.com/anushshukla/interview-coding-solutions/blob/production/get-unique-num-count.ts
+
+### Get all friends of friends
+
+#### Problem statement
+
+For a given input return the count of unique numbers.
+
+Ex:
+
+I/P = ```json
+const friends = [
+    {
+        "name": "Rahul",
+        "friends": [
+            {
+                "name": "Manasi",
+                "friends": [
+                    {
+                        "name": "Madhura",
+                        "friends": [
+                            {
+                                "name": "Shubham"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Pinky",
+        "friends": [
+            {
+                "name": "Anoop",
+                "friends": [
+                    {
+                        "name": "Ram"
+                    }
+                ]
+            },
+            {
+                "name": "Sham"
+            }
+        ]
+    },
+    {
+        "name": "Dinesh",
+        "friends": [
+            {
+                "name": "Geeta",
+                "friends": [
+                    {
+                        "name": "Anurag"
+                    },
+                    {
+                        "name": "Vishal",
+                        "friends": [
+                            {
+                                "name": "Vaishnavi"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Rupesh",
+                "friends": [
+                    {
+                        "name": "Akshay"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Bittu",
+        "friends": [
+            {
+                "name": "Vineet",
+                "friends": [
+                    {
+                        "name": "Pankaj"
+                    }
+                ]
+            },
+            {
+                "name": "Tony"
+            }
+        ]
+    }
+]
+``
+
+Print all the Friends of friends names
+
+Expected O/P: `['Rahul', 'Manasi', 'Madhura', 'Shubham', 'Pinky', 'Anoop', 'Sham', 'Ram', 'Dinesh', 'Geeta', 'Rupesh', 'Anurag', 'Vishal', 'Akshay', 'Vaishnavi', 'Bittu', 'Vineet', 'Tony', 'Pankaj']`
+
+
+#### Solution
+
+##### Assumptions
+- Input is array of Person where each person would have a name as string and an optional property as friends which will can be an array of Person.
+
+Code: https://github.com/anushshukla/interview-coding-solutions/blob/production/get-all-friends.ts
+
+
+
