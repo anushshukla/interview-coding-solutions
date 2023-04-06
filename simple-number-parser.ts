@@ -11,7 +11,7 @@ const BASIC_NUM_ASCII = {
     57: 9,
 }
 
-export default function convertToNumber(input) {
+export default function convertToNumber(input: string): number | NaN {
 
     if (typeof input === 'number') {
             return input;
