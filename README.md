@@ -140,5 +140,15 @@ Expected O/P: `['Rahul', 'Manasi', 'Madhura', 'Shubham', 'Pinky', 'Anoop', 'Sham
 
 Code: https://github.com/anushshukla/interview-coding-solutions/blob/production/get-all-friends.ts
 
+#### Problem statement
 
+Given a list of numbers, return the sum of all numbers in the list. If the list is empty, return 0. You may not use any loops in your solution. You must use recursion.
 
+#### Solution
+
+##### Assumptions
+- Integers
+- Decimals
+- Complex number excluded
+
+Code: https://github.com/anushshukla/interview-coding-solutions/blob/production/get-num-arr-sum.ts
