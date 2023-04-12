@@ -25,19 +25,12 @@ class Board {
 			throw new Error("Ladder must less than equal to " + this._maxSnakeSize);
 		}
 
-		let highestPositions;
-		let lowestPositions;
-		if (ladderPositions.length > snakePositions.length) {
-			highestPositions = ladderPositions;
-			lowestPositions = snakePositions;
-		} else {
-			highestPositions = snakePositions;
-			lowestPositions = ladderPositions;
-		}
+		let positions = [...ladderPositions, ...snakePositions];
 
 		const positionsHashmap: PositionUpDown = {};
 
-		for (const position of highestPositions) {
+		let index = 0;
+		for (const position of positions) {
 			const destinationPos = position.destination;
 			const sourcePos = position.source;
 			if (destinationPos < 1 || destinationPos > this._size) {
@@ -56,40 +49,50 @@ class Board {
 				);
 			}
 
-			// @ToDo improve below
-			const isConflicting = lowestPositions.find(
-				(lowestPosition) => lowestPositions.source === sourcePos
-			);
-			if (isConflicting) {
-				throw new Error("Snake and ladder should be on different positions");
+            if (positionsHashmap[sourcePos]) {
+                throw new Error("Snake and ladder should be on different positions");
+            }
+
+			if (index < ladderPositions.length && sourcePos > destinationPos) {
+				throw new Error("Destination position should be greater than source position for ladders");
+			}
+
+			if (index >= ladderPositions.length && sourcePos < destinationPos) {
+				throw new Error("Destination position should be greater than source position for snakes");
 			}
 
 			positionsHashmap[sourcePos] = destinationPos;
+			index++;
 		}
 		// validation for diagonal tail values for ladder
 		this._positions = positionsHashmap;
 	}
+
+    public get positions(): PositionUpDown {
+        return this._positions;
+    } 
 }
 
 class Player {
 	private _name: string;
-	private _position = 0;
+	private _position = 1;
 	private _size = 6;
 	public constructor(name: string) {
 		this._name = name;
 	}
-	public rollDice(board: Board): void {
+	public rollDice(board: Board): number {
 		const number = Math.floor(Math.random() * (this._size + 1));
 		let newPos = this._position + number;
 		if (newPos > 100) {
-			return;
+			return number;
 		}
-		this._position = board[newPos] || newPos;
+		this._position = board.positions[newPos] || newPos;
+		return number;
 	}
-	get position(): number {
+	public get position(): number {
 		return this._position;
 	}
-	get name(): string {
+	public get name(): string {
 		return this._name;
 	}
 }
@@ -99,28 +102,36 @@ interface Players {
 }
 
 class Game {
-	private _players: Players;
-	private _nextPlayer = 1;
+	private _players: Players = {};
+	private _currPlayer = 1;
 	private _board: Board;
-	private _winner: string;
+	private _winner: string | undefined;
 	constructor(board: Board, player1: Player, player2: Player) {
 		this._board = board;
 		this._players[1] = player1;
 		this._players[2] = player2;
 	}
-	public _rollDice(board: Board): void {
+	public _rollDice(): void {
 		if (this._winner) {
 			throw new Error("Game has ended with player as " + this._winner);
 		}
-		const player = this._players[this._nextPlayer];
-		player.rollDice(board);
-		this._players[this._nextPlayer] = player;
-		this._nextPlayer = this._nextPlayer === 1 ? 2 : 1;
-		if (this._players[this._nextPlayer].position === 100) {
+		const player = this._players[this._currPlayer];
+		const rolledNum = player.rollDice(this._board);
+		console.log({ rolledNum, _currPlayer: this._currPlayer });
+		this._players[this._currPlayer] = player;
+
+		if (player.position === 100) {
 			this._winner = player.name;
+			return;
 		}
+
+		if (rolledNum === 6) {
+			return;
+		}
+
+		this._currPlayer = this._currPlayer === 1 ? 2 : 1;
 	}
-	get winner(): string {
+	get winner(): string | undefined {
 		return this._winner;
 	}
 }
@@ -137,3 +148,15 @@ class Game {
  * 20  19  18  17  16  15  14  13  12  11
  * 1   2   3   4   5   6   7   8   9   10
  */
+
+// const board = new Board(
+// 	[{ source: 33, destination: 2 }],
+// 	[{ source: 5, destination: 23 }]
+// );
+// const player1 = new Player("Arun");
+// const player2 = new Player("Tarun");
+// const game = new Game(board, player1, player2);
+// game._rollDice();
+// game._rollDice();
+// game._rollDice();
+// console.log(game);
