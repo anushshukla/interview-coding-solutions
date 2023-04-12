@@ -39,19 +39,18 @@ Code: https://github.com/anushshukla/interview-coding-solutions/blob/production/
 
 #### Problem statement
 
-For a given input return the count of unique numbers.
+For a given input list all the friends and friends of friends.
 
-Ex:
+<details>
+    <summary>View Example</summary>
 
 I/P =
 ```json
 [{"name":"Rahul","friends":[{"name":"Manasi","friends":[{"name":"Madhura","friends":[{"name":"Shubham"}]}]}]},{"name":"Pinky","friends":[{"name":"Anoop","friends":[{"name":"Ram"}]},{"name":"Sham"}]},{"name":"Dinesh","friends":[{"name":"Geeta","friends":[{"name":"Anurag"},{"name":"Vishal","friends":[{"name":"Vaishnavi"}]}]},{"name":"Rupesh","friends":[{"name":"Akshay"}]}]},{"name":"Bittu","friends":[{"name":"Vineet","friends":[{"name":"Pankaj"}]},{"name":"Tony"}]}]
 ```
 
-Print all the Friends of friends names
-
 Expected O/P: `['Rahul', 'Manasi', 'Madhura', 'Shubham', 'Pinky', 'Anoop', 'Sham', 'Ram', 'Dinesh', 'Geeta', 'Rupesh', 'Anurag', 'Vishal', 'Akshay', 'Vaishnavi', 'Bittu', 'Vineet', 'Tony', 'Pankaj']`
-
+</details>
 
 #### Solution
 
