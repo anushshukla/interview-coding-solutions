@@ -77,11 +77,12 @@ class Player {
 	private _name: string;
 	private _position = 1;
 	private _size = 6;
+	private _start = 1;
 	public constructor(name: string) {
 		this._name = name;
 	}
 	public rollDice(board: Board): number {
-		const number = Math.floor(Math.random() * (this._size + 1));
+		const number = Math.floor(Math.random() * (this._size - this._start + 1) + this._start);
 		let newPos = this._position + number;
 		if (newPos > 100) {
 			return number;
@@ -111,7 +112,7 @@ class Game {
 		this._players[1] = player1;
 		this._players[2] = player2;
 	}
-	public _rollDice(): void {
+	public rollDice(): void {
 		if (this._winner) {
 			throw new Error("Game has ended with player as " + this._winner);
 		}
@@ -137,26 +138,23 @@ class Game {
 }
 
 /*
- * const board = new Board({33: 2, 44: 7, 99: 1, 88: 8, }, { 6: 33, 9: 92  });
- * const player1 = new Player("Anush");
- * const player2 = new Player("Avick");
+ * const board = new Board(
+	 * [{ source: 33, destination: 2 }],
+	 * [{ source: 5, destination: 23 }]
+ * );
+ * const player1 = new Player("Arun");
+ * const player2 = new Player("Tarun");
  * const game = new Game(board, player1, player2);
- * game._rollDice(board);
- * game._rollDice(board);
+ * game.rollDice();
+ * game.rollDice();
+ * game.rollDice();
+ * game.rollDice();
+ * game.rollDice();
+ * game.rollDice();
+ * console.log(game);
  *
  * 21  22  23  24  25  26  27  28  29  30
  * 20  19  18  17  16  15  14  13  12  11
  * 1   2   3   4   5   6   7   8   9   10
  */
 
-// const board = new Board(
-// 	[{ source: 33, destination: 2 }],
-// 	[{ source: 5, destination: 23 }]
-// );
-// const player1 = new Player("Arun");
-// const player2 = new Player("Tarun");
-// const game = new Game(board, player1, player2);
-// game._rollDice();
-// game._rollDice();
-// game._rollDice();
-// console.log(game);
