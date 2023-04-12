@@ -152,3 +152,31 @@ Given a list of numbers, return the sum of all numbers in the list. If the list 
 - Complex number excluded
 
 Code: https://github.com/anushshukla/interview-coding-solutions/blob/production/get-num-arr-sum.ts
+
+#### Problem statement
+
+LLD design snake ladder game.
+
+##### Requirements
+
+- Game board size: 100
+- Game board dimension: 2D
+- Game board row length: 10
+- Players count: 2
+- Dice roll size: 6
+- Snakes & Ladders commons constraints
+    - Max: 5
+    - Source and Destination numbers: Natural numbers
+    - No conflicting source position
+    - Same row source and destination position disallowed
+- Snakes: Destination position should be less than source position
+- Ladders: Destination position should be greater than source position
+
+#### Solution
+
+##### Assumptions
+- Integers
+- Decimals
+- Complex number excluded
+
+Code: https://github.com/anushshukla/interview-coding-solutions/blob/production/play-snake-ladder.ts
