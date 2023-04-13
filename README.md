@@ -98,9 +98,4 @@ LLD design snake ladder game.
 
 #### Solution
 
-##### Assumptions
-- Integers
-- Decimals
-- Complex number excluded
-
 Code: https://github.com/anushshukla/interview-coding-solutions/blob/production/play-snake-ladder.ts
