@@ -85,7 +85,9 @@ LLD design snake ladder game.
 - Game board dimension: 2D
 - Game board row length: 10
 - Players count: 2
-- Dice roll size: 6
+- Die size: 6
+- Player can start after rolling 6 on the die
+- Player will get another chance on rolling 6 on the die
 - Snakes & Ladders commons constraints
     - Max: 5
     - Source and Destination numbers: Natural numbers
