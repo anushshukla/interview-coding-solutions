@@ -99,3 +99,11 @@ LLD design snake ladder game.
 #### Solution
 
 Code: https://github.com/anushshukla/interview-coding-solutions/blob/production/play-snake-ladder.ts
+
+#### Problem statement
+
+Create Promise.customAll() with the expected behavior as Promise.all()
+
+#### Solution
+
+https://github.com/anushshukla/interview-coding-solutions/blob/production/custom-promise-all
