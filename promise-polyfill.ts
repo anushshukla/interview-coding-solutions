@@ -2,7 +2,7 @@ type SuccessCb<ResultType> = (result: ResultType) => void;
 
 type ErrCb<ErrorType> = (err: ErrorType) => void;
 
-export class PromisePolyFill<ResultType = any, ErrorType = any> {
+class PromisePolyFill<ResultType = any, ErrorType = any> {
     private _res?: ResultType;
     private _err?: ErrorType;
     private _isFulfilled = false;
@@ -74,7 +74,7 @@ export class PromisePolyFill<ResultType = any, ErrorType = any> {
         }
         this._safeCbFnCall((result?: ResultType) => {
             const revisedResult = successCb(result as ResultType);
-            // console.log('revisedResult', this._res, this._err);
+            console.log('revisedResult', typeof revisedResult);
             if (typeof revisedResult !== undefined) {
                 this._res = revisedResult as ResultType;
             }
@@ -93,27 +93,31 @@ export class PromisePolyFill<ResultType = any, ErrorType = any> {
 }
 
 async function main() {
-    const resolvedPromise = PromisePolyFill.resolve('resolvedPromise');
     new PromisePolyFill((resolve: SuccessCb<string>) => {
         setTimeout(() => resolve('resolvedPromiseDelayed'), 1000)
+    }).catch(err => {
+        console.log('resolvedPromiseDelayed catch', err);
     }).then(res => {
         console.log('resolvedPromiseDelayed then', res);
     });
     new PromisePolyFill((_resolve: SuccessCb<string>, reject: ErrCb<string>) => {
         setTimeout(() => reject('rejectedPromiseDelayed'), 1000)
+    }).then(res => {
+        console.log('rejectedPromiseDelayed then', res);
     }).catch(err => {
         console.log('rejectedPromiseDelayed catch', err);
     });
+    const resolvedPromise = PromisePolyFill.resolve('resolvedPromise');
     console.log('inlineResolvedPromise',  await resolvedPromise);
-    // const rejectedPromise = PromisePolyFill.reject('rejectedPromise');
-    // const inlineRejectedPromise = await rejectedPromise;
-    // console.log({ resolvedPromise, rejectedPromise, inlineResolvedPromise, inlineRejectedPromise });
     resolvedPromise.then(res => {
         console.log('resolvedPromise then', res);
     });
-    rejectedPromise.catch(err => {
-        console.log('rejectedPromise catch', err);
-    });
+    // const rejectedPromise = PromisePolyFill.reject('rejectedPromise');
+    // const inlineRejectedPromise = await rejectedPromise;
+    // console.log({ resolvedPromise, rejectedPromise, inlineResolvedPromise, inlineRejectedPromise });
+    // rejectedPromise.catch(err => {
+    //     console.log('rejectedPromise catch', err);
+    // });
 }
 
 main();
