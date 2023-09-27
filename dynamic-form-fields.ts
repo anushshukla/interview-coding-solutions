@@ -7,7 +7,8 @@ interface Field
     required: boolean,
     max: number;
     min: number;
-    regex: string; 
+    regex: string;
+    isMulti: boolean;
 }
 
 interface Form
